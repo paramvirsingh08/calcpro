@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge" alt="Status" />
+  <a href="https://paramvirsingh08.github.io/calcpro/"><img src="https://img.shields.io/badge/🚀_Live_Demo-Try_CalcPro_Online-success?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Live Demo" /></a>
   <img src="https://img.shields.io/badge/Version-2.0.0-6366f1?style=for-the-badge" alt="Version" />
   <img src="https://img.shields.io/badge/License-MIT-amber?style=for-the-badge" alt="License" />
   <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML5" />
