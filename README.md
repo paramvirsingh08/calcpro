@@ -49,9 +49,13 @@
     </td>
   </tr>
   <tr>
-    <td colspan="2" align="center">
-      <b>Clean Light Theme</b><br/>
-      <img src="assets/preview-light.png" alt="Light Theme" width="70%" />
+    <td width="50%" align="center">
+      <b>Interactive Math Reference Notes</b><br/>
+      <img src="assets/preview-notes.png" alt="Math Notes" width="100%" />
+    </td>
+    <td width="50%" align="center">
+      <b>Clean Minimal Light Theme</b><br/>
+      <img src="assets/preview-light.png" alt="Light Theme" width="100%" />
     </td>
   </tr>
 </table>
