@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A premium all-in-one calculator with Scientific mode, Unit Converter, and Math Notes. Glassmorphism UI with dark/light themes, keyboard support, and calculation history.">
+    <meta name="keywords" content="calculator, scientific calculator, unit converter, math notes, glassmorphism, web calculator">
+    <meta name="author" content="Paramvir Singh">
+    <meta property="og:title" content="CalcPro — Scientific Calculator & Converter">
+    <meta property="og:description" content="Premium calculator with scientific mode, unit converter, math reference notes, glassmorphism design, and keyboard support.">
+    <meta property="og:type" content="website">
+    <title>CalcPro — Scientific Calculator & Converter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Animated Background Orbs & Ambient Particles -->
+    <div class="bg-orb bg-orb-1" aria-hidden="true"></div>
+    <div class="bg-orb bg-orb-2" aria-hidden="true"></div>
+    <div class="bg-orb bg-orb-3" aria-hidden="true"></div>
+    <div class="bg-orb bg-orb-4" aria-hidden="true"></div>
+    <div class="particles-container" id="particlesContainer" aria-hidden="true"></div>
+
+    <main class="app-wrapper" id="appWrapper">
+
+        <!-- Top Navigation Tabs (Animated Slider) -->
+        <nav class="tab-bar" id="tabBar" aria-label="Calculator modes">
+            <div class="tab-track-glow" id="tabTrackGlow" aria-hidden="true"></div>
+            <div class="tab-indicator" id="tabIndicator" aria-hidden="true">
+                <span class="tab-indicator-pill"></span>
+            </div>
+            <button class="tab active" data-tab="basic" id="tabBasic" aria-selected="true">
+                <span class="tab-icon">🧮</span>
+                <span class="tab-label">Calculator</span>
+            </button>
+            <button class="tab" data-tab="scientific" id="tabScientific" aria-selected="false">
+                <span class="tab-icon">🔬</span>
+                <span class="tab-label">Scientific</span>
+            </button>
+            <button class="tab" data-tab="converter" id="tabConverter" aria-selected="false">
+                <span class="tab-icon">🔄</span>
+                <span class="tab-label">Converter</span>
+            </button>
+            <button class="tab" data-tab="notes" id="tabNotes" aria-selected="false">
+                <span class="tab-icon">📐</span>
+                <span class="tab-label">Notes</span>
+            </button>
+            <!-- Theme Toggle (right side) -->
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" title="Toggle Light/Dark Mode">
+                <span class="theme-icon" id="themeIcon">🌙</span>
+            </button>
+        </nav>
+
+        <div class="main-content" id="mainContent">
+
+            <!-- ==================== BASIC CALCULATOR ==================== -->
+            <section class="panel active" id="basicPanel" aria-label="Basic Calculator">
+                <div class="calc-card glass-card">
+                    <header class="calc-header">
+                        <div class="calc-title">
+                            <span class="calc-icon">⚡</span>
+                            <h1>Calculator</h1>
+                        </div>
+                    </header>
+
+                    <div class="display-container" id="displayContainer">
+                        <div class="expression" id="expression" aria-live="polite"></div>
+                        <div class="display-mask" id="displayMask">
+                            <div class="display-digits" id="displayDigits" aria-hidden="true">
+                                <span class="digit-slot"><span class="digit-char placeholder">0</span></span>
+                            </div>
+                            <input type="text" class="display hidden-real-input" id="inputBox" placeholder="0" readonly aria-label="Calculator display">
+                        </div>
+                    </div>
+
+                    <div class="buttons-grid" id="buttonsGrid">
+                        <button class="btn btn-function" id="btnAC" data-value="AC" aria-label="Clear all">AC</button>
+                        <button class="btn btn-function" id="btnDEL" data-value="DEL" aria-label="Delete">⌫</button>
+                        <button class="btn btn-function" id="btnPercent" data-value="%" aria-label="Percent">%</button>
+                        <button class="btn btn-operator" id="btnDivide" data-value="/" aria-label="Divide">÷</button>
+
+                        <button class="btn btn-number" id="btn7" data-value="7">7</button>
+                        <button class="btn btn-number" id="btn8" data-value="8">8</button>
+                        <button class="btn btn-number" id="btn9" data-value="9">9</button>
+                        <button class="btn btn-operator" id="btnMultiply" data-value="*" aria-label="Multiply">×</button>
+
+                        <button class="btn btn-number" id="btn4" data-value="4">4</button>
+                        <button class="btn btn-number" id="btn5" data-value="5">5</button>
+                        <button class="btn btn-number" id="btn6" data-value="6">6</button>
+                        <button class="btn btn-operator" id="btnSubtract" data-value="-" aria-label="Subtract">−</button>
+
+                        <button class="btn btn-number" id="btn1" data-value="1">1</button>
+                        <button class="btn btn-number" id="btn2" data-value="2">2</button>
+                        <button class="btn btn-number" id="btn3" data-value="3">3</button>
+                        <button class="btn btn-operator" id="btnAdd" data-value="+" aria-label="Add">+</button>
+
+                        <button class="btn btn-number" id="btnPlusMinus" data-value="+/-" aria-label="Toggle sign">±</button>
+                        <button class="btn btn-number" id="btn0" data-value="0">0</button>
+                        <button class="btn btn-number" id="btnDot" data-value=".">.</button>
+                        <button class="btn btn-equals" id="btnEquals" data-value="=" aria-label="Equals">=</button>
+                    </div>
+
+                    <div class="keyboard-hint">
+                        <span>⌨️ Keyboard supported</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== SCIENTIFIC CALCULATOR ==================== -->
+            <section class="panel" id="scientificPanel" aria-label="Scientific Calculator">
+                <div class="calc-card glass-card scientific-card">
+                    <header class="calc-header">
+                        <div class="calc-title">
+                            <span class="calc-icon">🔬</span>
+                            <h1>Scientific</h1>
+                        </div>
+                        <div class="slider-toggle" id="angleToggle" role="radiogroup" aria-label="Angle mode">
+                            <div class="slider-thumb" id="angleThumb"></div>
+                            <button type="button" class="slider-opt active" data-mode="DEG">DEG</button>
+                            <button type="button" class="slider-opt" data-mode="RAD">RAD</button>
+                        </div>
+                    </header>
+
+                    <div class="display-container" id="sciDisplayContainer">
+                        <div class="expression" id="sciExpression" aria-live="polite"></div>
+                        <div class="display-mask" id="sciDisplayMask">
+                            <div class="display-digits" id="sciDisplayDigits" aria-hidden="true">
+                                <span class="digit-slot"><span class="digit-char placeholder">0</span></span>
+                            </div>
+                            <input type="text" class="display hidden-real-input" id="sciInputBox" placeholder="0" readonly aria-label="Scientific calculator display">
+                        </div>
+                    </div>
+
+                    <!-- Scientific Buttons -->
+                    <div class="sci-buttons-grid" id="sciButtonsGrid">
+                        <button class="btn btn-sci" data-action="sin">sin</button>
+                        <button class="btn btn-sci" data-action="cos">cos</button>
+                        <button class="btn btn-sci" data-action="tan">tan</button>
+                        <button class="btn btn-sci" data-action="log">log</button>
+                        <button class="btn btn-sci" data-action="ln">ln</button>
+
+                        <button class="btn btn-sci" data-action="asin">sin⁻¹</button>
+                        <button class="btn btn-sci" data-action="acos">cos⁻¹</button>
+                        <button class="btn btn-sci" data-action="atan">tan⁻¹</button>
+                        <button class="btn btn-sci" data-action="sqrt">√</button>
+                        <button class="btn btn-sci" data-action="cbrt">∛</button>
+
+                        <button class="btn btn-sci" data-action="square">x²</button>
+                        <button class="btn btn-sci" data-action="cube">x³</button>
+                        <button class="btn btn-sci" data-action="power">xⁿ</button>
+                        <button class="btn btn-sci" data-action="factorial">n!</button>
+                        <button class="btn btn-sci" data-action="reciprocal">1/x</button>
+
+                        <button class="btn btn-sci" data-action="pi">π</button>
+                        <button class="btn btn-sci" data-action="euler">e</button>
+                        <button class="btn btn-sci" data-action="exp10">10ˣ</button>
+                        <button class="btn btn-sci" data-action="expE">eˣ</button>
+                        <button class="btn btn-sci" data-action="abs">|x|</button>
+                    </div>
+
+                    <!-- Standard Buttons -->
+                    <div class="buttons-grid" id="sciStdButtonsGrid">
+                        <button class="btn btn-function" data-value="AC">AC</button>
+                        <button class="btn btn-function" data-value="DEL">⌫</button>
+                        <button class="btn btn-function" data-value="%">%</button>
+                        <button class="btn btn-operator" data-value="/">÷</button>
+
+                        <button class="btn btn-number" data-value="7">7</button>
+                        <button class="btn btn-number" data-value="8">8</button>
+                        <button class="btn btn-number" data-value="9">9</button>
+                        <button class="btn btn-operator" data-value="*">×</button>
+
+                        <button class="btn btn-number" data-value="4">4</button>
+                        <button class="btn btn-number" data-value="5">5</button>
+                        <button class="btn btn-number" data-value="6">6</button>
+                        <button class="btn btn-operator" data-value="-">−</button>
+
+                        <button class="btn btn-number" data-value="1">1</button>
+                        <button class="btn btn-number" data-value="2">2</button>
+                        <button class="btn btn-number" data-value="3">3</button>
+                        <button class="btn btn-operator" data-value="+">+</button>
+
+                        <button class="btn btn-number" data-value="+/-">±</button>
+                        <button class="btn btn-number" data-value="0">0</button>
+                        <button class="btn btn-number" data-value=".">.</button>
+                        <button class="btn btn-equals" data-value="=">=</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== UNIT CONVERTER ==================== -->
+            <section class="panel" id="converterPanel" aria-label="Unit Converter">
+                <div class="converter-card glass-card">
+                    <header class="calc-header">
+                        <div class="calc-title">
+                            <span class="calc-icon">🔄</span>
+                            <h1>Unit Converter</h1>
+                        </div>
+                    </header>
+
+                    <!-- Category Pills -->
+                    <div class="category-pills" id="categoryPills">
+                        <button class="pill active" data-category="length">📏 Length</button>
+                        <button class="pill" data-category="currency">💱 Currency</button>
+                        <button class="pill" data-category="weight">⚖️ Weight</button>
+                        <button class="pill" data-category="temperature">🌡️ Temp</button>
+                        <button class="pill" data-category="area">📐 Area</button>
+                        <button class="pill" data-category="volume">🧪 Volume</button>
+                        <button class="pill" data-category="speed">🏎️ Speed</button>
+                        <button class="pill" data-category="time">⏱️ Time</button>
+                        <button class="pill" data-category="data">💾 Data</button>
+                    </div>
+
+                    <!-- From -->
+                    <div class="convert-section">
+                        <label class="convert-label">From</label>
+                        <div class="convert-row">
+                            <input type="number" class="convert-input" id="fromValue" placeholder="Enter value" aria-label="Value to convert">
+                            <select class="convert-select" id="fromUnit" aria-label="From unit"></select>
+                        </div>
+                    </div>
+
+                    <!-- Swap -->
+                    <div class="swap-container">
+                        <button class="swap-btn" id="swapBtn" aria-label="Swap units">
+                            <span class="swap-icon">⇅</span>
+                        </button>
+                    </div>
+
+                    <!-- To -->
+                    <div class="convert-section">
+                        <label class="convert-label">To</label>
+                        <div class="convert-row">
+                            <input type="text" class="convert-input result-input" id="toValue" readonly placeholder="Result" aria-label="Converted value">
+                            <select class="convert-select" id="toUnit" aria-label="To unit"></select>
+                        </div>
+                    </div>
+
+                    <!-- Formula / Rate info -->
+                    <div class="formula-display" id="formulaDisplay">
+                        <div class="formula-main">
+                            <span class="formula-label" id="formulaLabel">Formula:</span>
+                            <span class="formula-text" id="formulaText">Select units to see formula</span>
+                        </div>
+                        <div class="currency-meta" id="currencyMeta" style="display: none;">
+                            <span class="rate-status" id="rateStatus">🟢 Live rates</span>
+                            <button type="button" class="refresh-rate-btn" id="refreshRateBtn" title="Refresh live rates" aria-label="Refresh live rates">↻</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== MATH NOTES ==================== -->
+            <section class="panel" id="notesPanel" aria-label="Math Notes">
+                <div class="notes-card glass-card">
+                    <header class="calc-header">
+                        <div class="calc-title">
+                            <span class="calc-icon">📐</span>
+                            <h1>Math Reference</h1>
+                        </div>
+                    </header>
+
+                    <!-- Notes Search -->
+                    <div class="notes-search-container">
+                        <input type="text" class="notes-search" id="notesSearch" placeholder="🔍 Search formulas..." aria-label="Search math formulas">
+                    </div>
+
+                    <!-- Notes Grid -->
+                    <div class="notes-grid" id="notesGrid">
+                        <!-- Rendered by JS -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== HISTORY PANEL ==================== -->
+            <aside class="history-panel glass-card" id="historyPanel" aria-label="Calculation history">
+                <div class="history-header">
+                    <h2>📋 History</h2>
+                    <button class="clear-history-btn" id="clearHistoryBtn" aria-label="Clear history">Clear</button>
+                </div>
+                <div class="history-list" id="historyList">
+                    <div class="history-empty" id="historyEmpty">
+                        <span class="history-empty-icon">🕐</span>
+                        <p>No calculations yet</p>
+                    </div>
+                </div>
+            </aside>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <p>Built with ❤️ by <strong>Paramvir Singh</strong></p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
